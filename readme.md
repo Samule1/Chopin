@@ -1,5 +1,8 @@
 # Chopin
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="80">
+
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="150">
+
 
 Chopain is a machine learning based, online music profiler service, powered by React + Redux and node.js + Express.
 
