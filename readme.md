@@ -1,12 +1,12 @@
 # Chopin
 
+<div style="text-align: center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="150"></div>
 
-<img style="text-align: center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="150">
 
 
 Chopin is a machine learning based, online music profiler service, powered by React + Redux and node.js + Express.
 
-### Functional specification
+## Functional specification
 
 Our vision is to bring a whole new perspective to music listeners. We want to take a quick glance in peoples subconscious and present our findings to the user in a convenient way.
 
