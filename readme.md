@@ -1,6 +1,6 @@
 # Chopin
 
-<div style="text-align: center"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="150"></div>
+<p align="center" ><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="150"></p>
 
 
 
