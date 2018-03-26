@@ -4,7 +4,7 @@
 
 
 
-Chopin is a machine learning based, online music profiler service, powered by React + Redux and node.js + Express.
+Chopin is a machine learning based, online, music profiler service, powered by React + Redux and node.js + Express.
 
 ## Functional specification
 
