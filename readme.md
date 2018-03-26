@@ -4,7 +4,7 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg/1200px-Eug%C3%A8ne_Ferdinand_Victor_Delacroix_043.jpg" width="150">
 
 
-Chopain is a machine learning based, online music profiler service, powered by React + Redux and node.js + Express.
+Chopin is a machine learning based, online music profiler service, powered by React + Redux and node.js + Express.
 
 ## Functional specification
 
@@ -13,7 +13,39 @@ Chopain is a machine learning based, online music profiler service, powered by R
 
 ## Technological specification
 
-You can also:
-  - Import and save files from GitHub, Dropbox, Google Drive and One Drive
-  - Drag and drop markdown and HTML files into Dillinger
-  - Export documents as Markdown, HTML and PDF
+The following features are deemed desirable and the choice of framework is something that was done based on adherence to these features of interest:
+
+* In use by the industry, this is important on a personal level as knowledge of relevant platforms is valuable in job application.
+
+* High compatibility with the chosen frontend framework.
+
+* Light weight. There are many solutions out there and they have different strengths. One strength that we are not looking for here is “good enterprise solution”.
+
+* Start up time. Time is short and the project needs to start making real progress early.
+
+#### Chosen frontend framework
+
+This project will use [React](https://reactjs.org/). The main reason being that it has seen its popularity steadily on the rise since its inception a couple of years ago. Our guess is that competence in using this framework may be of value in a job application scenario. Since it being a requirement of [TDDD27](http://www.ida.liu.se/~TDDD27/) this project will also make use of [Redux](https://redux.js.org/).
+
+
+#### Chosen back end framework
+
+The project will use [Node.js](https://nodejs.org/en/) for the back end. Programming in Node is done in JavaScript, this will make for a homogeneous solution our front-  and back end will be written in the same language. Node is also popular in industry and is uses by companies like Netflix, LinkedIn, Trello and Uber. 
+
+Is node light weight? In the grand scheme of things our estimation is that Nodes resides on the lighter side of the spectrum, especially if one considers giants like .NET.
+
+On top of the Node back end we will run [Express](https://expressjs.com/). This will make life easier and the framework will help in the construction of the API and offer a cleaner solution than pure Node would.
+
+#### Responsibilities of the front end
+
+The front end should have the ability to send requests for data from the back end via the API. Different kinds of data may need to be visualized on the front end and the solution should facilitate the necessary environment for doing so. 
+
+The front end receives login information from a user and sends this to the back end.
+
+#### Responsibilities of the back end
+
+The back end exposes a relevant API. It will receive login information and handle access tokens for getting personal Spotify data of the active user. The back end will perform preprocessing of Spotify data so as the front end need not worry about more than rendering whatever it is sent from the back end server.
+
+#### Work and meta work
+
+The main idea of the application is now outlined. In case of things turning out to be too much work given the time constraint or work progressing faster than expected, the amount of meta work will be either increased or decreased. Meta work is that which aids development but provides no change in experience for end users. An example of meta work is continuous integration. 
