@@ -30,7 +30,7 @@ This project will use [React](https://reactjs.org/). The main reason being that 
 
 #### Chosen back end framework
 
-The project will use [Node.js](https://nodejs.org/en/) for the back end. Programming in Node is done in JavaScript, this will make for a homogeneous solution our front-  and back end will be written in the same language. Node is also popular in industry and is uses by companies like Netflix, LinkedIn, Trello and Uber. 
+The project will use [Node.js](https://nodejs.org/en/) for the back end. Programming in Node is done in JavaScript, this will make for a homogeneous solution as our front-  and back end will be written in the same language. Node is also popular in industry and is used by companies like Netflix, LinkedIn, Trello and Uber. 
 
 Is node light weight? In the grand scheme of things our estimation is that Nodes resides on the lighter side of the spectrum, especially if one considers giants like .NET.
 
