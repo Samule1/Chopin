@@ -15,10 +15,10 @@ The idea is to base our application on Spotify’s Web API (https://developer.sp
 Example of a typical scenario in our service
 
 - User logs in through Spotify and want to learn more about his/her top tracks
-- Application fetches top artists and tracks (https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/)
-- Application fetches data about these top tracks (https://developer.spotify.com/web-api/get-audio-features/)
+- Application fetches [top artists and tracks](https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/)
+- Application fetches [data](https://developer.spotify.com/web-api/get-audio-features/) about these top tracks
 - Tempo and energy creates a 2D space on which we run k-means with some k’s.
-- The result is visualized with D3.js (https://d3js.org/) with the resulting clusters similar to the image below
+- The result is visualized with [D3.js](https://d3js.org/) with the resulting clusters similar to the image below
 
 <img src="https://study.com/cimages/multimages/16/protein-interaction.jpg" width="150">
 
