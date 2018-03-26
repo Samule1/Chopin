@@ -6,10 +6,21 @@
 
 Chopin is a machine learning based, online music profiler service, powered by React + Redux and node.js + Express.
 
-## Functional specification
+### Functional specification
 
-  - Import a HTML file and watch it magically convert to Markdown
-  - Drag and drop images (requires your Dropbox account be linked)
+Our vision is to bring a whole new perspective to music listeners. We want to take a quick glance in peoples subconscious and present our findings to the user in a convenient way.
+#
+The idea is to base our application on Spotify’s Web API (https://developer.spotify.com/web-api/). The API makes it possible to fetch various data from the user who logs in through our service. This data will be fed to different machine learning and/or data mining algorithms, trying to extract previously unknown and potentially useful knowledge. Furthermore, the output could be used for visualization or track suggestions.
+#
+Example of a typical scenario in our service
+
+- User logs in through Spotify and want to learn more about his/her top tracks
+- Application fetches top artists and tracks (https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/)
+- Application fetches data about these top tracks (https://developer.spotify.com/web-api/get-audio-features/)
+- Tempo and energy creates a 2D space on which we run k-means with some k’s.
+- The result is visualized with D3.js (https://d3js.org/) with the resulting clusters similar to the image below
+
+<img src="https://bl.ocks.org/mbostock/raw/4063530/" width="150">
 
 ## Technological specification
 
