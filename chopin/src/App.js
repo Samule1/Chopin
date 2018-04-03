@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import queryString from 'query-string'
+import Login from './components/Login'
+import DataDisplay from './components/DataDisplay'
+
 
 class App extends Component {
+
+  componentDidMount(){
+    
+    let parsed = queryString.parse(window.location.search);
+    let accessToken = parsed.access_token;
+
+    if (!accessToken)
+      return;
+    console.log(accessToken)
+    fetch('http://localhost:3001/top?token='+accessToken)
+      .then(response => response.json())
+      .then(responseJSON => console.log(responseJSON))
+
+  }
   render() {
+    let d = ["hej"]
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <header>TDDD27 Project</header>
+        <Login data = {d} />
+        <DataDisplay />
       </div>
     );
   }
