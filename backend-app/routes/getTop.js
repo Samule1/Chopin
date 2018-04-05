@@ -2,27 +2,21 @@ let express = require('express');
 let router = express.Router();
 let spotify = require('spotify-web-api-node');
 let request = require('request');
+let rp = require('request-promise-native');
+let featurecleaner = require('./../preprocessing/cleanfeatures').clean
 
-const fs = require('fs');
+let compose_feature_query = function(token, songs){
 
-let getAnlysis = function(token, songs){
-    
-    let options = {
-        url: "https://api.spotify.com/v1/audio-features/?ids="+songs.join(','),
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    }
-
-    request(options, (err, response, body)=>{
-        if(!err){
-            fs.writeFile('audiofeatures.txt', body, (err) => {  
-                if (err) throw err;
-                console.log(body)
-                console.log('Wrote data to file successfully!');
-            });
+    return new Promise((resolve, reject) =>{
+        let options = {
+            url: "https://api.spotify.com/v1/audio-features/?ids="+songs.join(','),
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
         }
 
+        if(options) resolve(options)
+        else reject(new Error('failed to construct song-feature options'))
     })
 }
 
@@ -35,15 +29,18 @@ router.get('/', (req, res, next) => {
             'Authorization': 'Bearer ' + token
         }
     }
-    request(options, (err, response, body)=>{
-        if(!err){
-            let bodyJSON = JSON.parse(body)
-            let tracks = bodyJSON.items.map(track => track.id)
-            getAnlysis(token, tracks)
-            
-            res.send(JSON.stringify(tracks))
-        }
-
+    
+    rp(options).then((body) =>{
+        let bodyJSON = JSON.parse(body)
+        let tracks = bodyJSON.items.map(track => track.id)
+        return compose_feature_query(token, tracks)
+    })
+    .then((feture_options) =>{
+        return rp(feture_options)
+    })
+    .then((feture_body) =>{
+        let songs = feture_body
+        console.log(featurecleaner(songs))
     })
     
 
