@@ -9,10 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-
-
-
-def get_clusters(data, k = 2):
+def get_clusters(data, k = 2, prnt=False):
     
     df = pd.DataFrame(data)
     dfvals = df.values
@@ -23,17 +20,15 @@ def get_clusters(data, k = 2):
     
     pc = PCA(n_components=2)
     pc.fit(np.transpose(df_scaled.values))
-    print(pc.components_[1]) 
-    
-    plt.plot(pc.components_[0], pc.components_[1], 'ro')
-    plt.show()
+    if prnt:
+        print(pc.components_[1]) 
+        
+        plt.plot(pc.components_[0], pc.components_[1], 'ro')
+        plt.show()
     
     
     print(kmeans.labels_)
-    pass
+    
 
 if __name__ == "__main__":
-    with open('d.txt') as json_data:
-        jdata = json.load(json_data)
-        get_clusters(jdata, 1)
-        print("all is well!")
+    print "This module should not be run as main.."
