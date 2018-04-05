@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import queryString from 'query-string'
 import Login from './components/Login'
-import DataDisplay from './components/DataDisplay'
+import Cluster2D from './components/Cluster2D'
 
 
 class App extends Component {
 
   componentDidMount(){
-    
+
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
 
@@ -26,7 +26,9 @@ class App extends Component {
       <div className="App">
         <header>TDDD27 Project</header>
         <Login data = {d} />
-        <DataDisplay />
+        <svg width="900" height="450">
+            <Cluster2D width={900} height={450}/>
+        </svg>
       </div>
     );
   }
