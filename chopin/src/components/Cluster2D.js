@@ -49,7 +49,7 @@ class Cluster2D extends Component {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     */
     console.log("this.refs: " + this.refs['anchor']);
-    const svg = d3.select(this.refs.anchor);
+    const svg = d3.select(this.refs.ancho);
 
 
 
