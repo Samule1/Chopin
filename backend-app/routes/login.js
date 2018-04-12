@@ -3,8 +3,8 @@ let router = express.Router();
 let querystring = require('querystring')
 let secret = require('./../secrets/secret');
 
-let redirect_uri = 
-  process.env.REDIRECT_URI || 
+let redirect_uri =
+  process.env.REDIRECT_URI ||
   'http://localhost:3001/callback'
 
 router.get('/', function(req, res) {

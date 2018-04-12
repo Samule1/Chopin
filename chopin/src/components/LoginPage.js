@@ -6,7 +6,6 @@ class LoginPage extends Component {
   render() {
     return (
         <div>
-            <div> HERE THE LOGIN PAGE SHOULD BE RENDERED, RENDERING OLD LOGIN FOR NOW.. </div>
             <Login/>
         </div>
     );

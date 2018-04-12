@@ -26,8 +26,7 @@ class Main extends Component {
   render() {
     
     return (
-      <div className="App">
-          <Login/>  
+      <div className="App"> 
           <svg width="900" height="450">
               <Cluster2D width={900} height={450}/>
           </svg>
