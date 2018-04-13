@@ -1,0 +1,84 @@
+
+[
+    {
+        "name": "cluster1",
+        "children": [
+            {
+                "name": "Writing something long",
+                "size": 23,
+                "cluster": 1
+            },
+            {
+                "name": "A song",
+                "size": 10,
+                "cluster": 1
+            },
+            {
+                "name": "Another song..",
+                "size": 4,
+                "cluster": 1
+            },
+            {
+                "name": "Best song",
+                "size": 17,
+                "cluster": 1
+            }
+            
+        ]
+        
+    },   
+    {
+        "name": "cluster2",
+        "children": [
+            {
+                "name": "AA",
+                "size": 44,
+                "cluster": 2
+            },
+            {
+                "name": "flare",
+                "size": 15,
+                "cluster": 2
+            },
+            {
+                "name": "ddf",
+                "size": 13,
+                "cluster": 2
+            },
+            {
+                "name": "dfdf",
+                "size": 3,
+                "cluster": 2
+            }
+            
+        ]
+        
+    },
+    {
+        "name": "cluster3",
+        "children": [
+            {
+                "name": "Writing something long",
+                "size": 7,
+                "cluster": 3
+            },
+            {
+                "name": "gfrbff",
+                "size": 10,
+                "cluster": 3
+            },
+            {
+                "name": "fd",
+                "size": 32,
+                "cluster": 3
+            },
+            {
+                "name": "dff",
+                "size": 10,
+                "cluster": 3
+            }
+            
+        ]
+        
+    }
+]

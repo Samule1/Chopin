@@ -7,42 +7,73 @@ import './../plotstyle/circle.css'
 
 class Circle extends Component {
 
-    componentDidMount(){
+    constructor(props){
+         super(props)
+         console.log('Contructing!')
+         this.state = {data: require("../data/cluster_format_template.json")}
+
+    }
+
+    draw(g, pack, colors, format, cleanfirst){
+
+        if(cleanfirst){
+            console.log("I am going to paint the world blue!")
+            let rm = this.svg.selectAll('.node')
+            rm.remove()
+            console.log(rm)
+        }
         
-        console.log('FIRE1')
-        const svg = d3.select(this.refs.anchor);
-        let diameter = 960//svg.attr("width");
-        let g = svg.append("g").attr("transform", "translate(2,2)");
-        let format = d3.format(",d");
-        let pack = d3.pack().size([diameter - 4, diameter - 4]);
-        let root = require("../data/flare.json");
         
-        console.log('FIRE3')
-        
-        console.log(g)
-        root = d3.hierarchy(root)
-                        .sum((d) => { return d.size;})
-                        .sort((a, b) => { return b.value - a.value; });
-        console.log(root)
+        let root = this.state.data
+        root = d3.hierarchy({children: root})
+                 .sum((d) => { return d.size;})
+                 .sort((a, b) => { return b.value - a.value; });
+
         let node = g.selectAll(".node")
-                    .data(pack(root).descendants())
+                    .data(pack(root).leaves())
                     .enter().append("g")
-                    .attr("class", d => { return d.children ? "node" : "leaf node"; })
+                    .attr("class", "node")
                     .attr("transform", d => { return "translate(" + d.x + "," + d.y + ")"; })
-        
+                    .style("fill", d => colors(d.data.cluster) );
+
         node.append("title")
             .text(d => { return d.data.name + "\n" + format(d.value); });
-        
+
         node.append("circle")
             .attr("r", d => { return d.r; });
-        
+
         node.filter(d => !d.children).append("text")
             .attr("dy", "0.3em")
-            .text(d => { return d.data.name.substring(0, d.r / 3); });
+            .text(d => { return d.data.name.substring(0, d.r / 3); })
+            .style("fill", "black");
+
+        node.on('mouseover ', (d)=>{
+            console.log(d.data.name)
+        })
+
+        console.log(this.state)
+    }
+    
+    componentDidUpdate(){
+        this.draw(this.g, this.pack, this.colors, this.format, true)
+    }
+
+    componentDidMount(){
+        
+        this.svg = d3.select(this.refs.anchor);
+        this.diameter = 960//svg.attr("width");
+        this.g = this.svg.append("g").attr("transform", "translate(2,2)");
+        this.format = d3.format(",d");
+        this.pack = d3.pack().size([this.diameter - 4, this.diameter - 4]);
+        
+        this.colors = d3.scaleOrdinal(d3.schemeCategory10);
+        
+        this.draw(this.g, this.pack, this.colors, this.format, false)
+
         
     }
     render() {
-        console.log("render()");
+       
         return <g ref ="anchor" />;
     }
 }
