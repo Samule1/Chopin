@@ -3,6 +3,8 @@ import './../App.css';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3'
 import './../plotstyle/circle.css'
+import queryString from 'query-string'
+import GetTop from './GetTop'
 
 
 class Circle extends Component {
@@ -25,6 +27,7 @@ class Circle extends Component {
         
         
         let root = this.state.data
+
         root = d3.hierarchy({children: root})
                  .sum((d) => { return d.size;})
                  .sort((a, b) => { return b.value - a.value; });
@@ -59,6 +62,18 @@ class Circle extends Component {
     }
 
     componentDidMount(){
+
+        let parsed = queryString.parse(window.location.search);
+        let accessToken = parsed.access_token;
+    
+        if (accessToken){
+            console.log(accessToken)
+            fetch('http://localhost:3001/top?token='+accessToken)
+              .then(response => response.json())
+              .then(responseJSON => this.setState({data: responseJSON}))
+        }
+
+        
         
         this.svg = d3.select(this.refs.anchor);
         this.diameter = 960//svg.attr("width");
@@ -73,7 +88,6 @@ class Circle extends Component {
         
     }
     render() {
-       
         return <g ref ="anchor" />;
     }
 }

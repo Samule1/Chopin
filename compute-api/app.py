@@ -18,11 +18,10 @@ def principal_clusters():
     data - JSON formatted data array containing the features of each track.
     k - number of clusters
     """
-    jsondata = json.loads(request.data)
+    jsondata = request.json
     features = jsondata.get('data')
     k = jsondata.get('k')
-    kkmeans.get_clusters(features, k)
-    return "I printed your result to my terminal, was that not useful?"
+    return kkmeans.get_clusters(features, k)
 
 @app.route('/help')
 def info_page():
@@ -35,7 +34,7 @@ def info_page():
     
 
 if __name__ == "__main__":
-    print "running.."
+    print("running..")
     app.run(debug=True, port=5000)
     
 
