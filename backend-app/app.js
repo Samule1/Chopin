@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const dataRouter = require('./routes/data');
 const loginRouter = require('./routes/login');
+const authenticationRouter = require('./routes/authentication');
 const callbackRouter = require('./routes/callback');
 const getTopRouter = require('./routes/getTop');
 
@@ -32,6 +33,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/data', dataRouter)
 app.use('/login', loginRouter)
+app.use('/authentication', authenticationRouter)
 app.use('/callback', callbackRouter)
 app.use('/top', getTopRouter)
 

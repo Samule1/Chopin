@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { actions } from './../actions/actions'
 import './../App.css';
+import { connect } from 'react-redux'
+import LoginButton from '../images/login_spotify.png';
+
+let buttonStyle = "buttonStyle";
 
 class Login extends Component {
   constructor(props) {
@@ -12,63 +16,53 @@ class Login extends Component {
     }
 
     /* Bind local functions and onSubmit event handlers */
-    this.submitLoginHandler = this.submitLoginHandler.bind(this);
+    this.loginHandler = this.loginHandler.bind(this);
     this.inputChangeHandler = this.inputChangeHandler.bind(this);
   }
 
-  submitLoginHandler(event) {
-    /* Don't use the ordinary submit event... */
+  loginHandler(event) {
+    /* Don't use the ordinary login event... */
     event.preventDefault();
-
     /*
     this.setState({ submitted: true });
     const { username, password } = this.state;
-    const { dispatch } = this.props;
     */
 
-    console.log("Dispatch: " + this.props);
+    console.log("Dispatch: " + typeof dispatch);
     const username = this.state.username;
     const password = this.state.password;
-    const dispatch = this.props;
 
-
-    if (username && password) {
-      //dispatch(actions.login(username, password));
-    }
+    this.props.dispatch(actions.login());
   }
 
   inputChangeHandler(event) {
-    console.log("ipnutChangeHandler() event: " + event);
+    console.log("inputChangeHandler() event: " + event);
     const { name, value } = event.target;
         this.setState({ [name]: value });
   }
 
   render() {
-
     const username = this.state.username;
     const password = this.state.password;
+    const signing_in = this.props.signing_in;
 
     return (
-      <div className="col-md-80 col-md-offset-10">
-        <h1>Login</h1>
-        <form name="login-form" onSubmit={this.submitLoginHandler}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input type="text" className="form-control" name="username" placeholder="Enter email" value={username} onChange={this.inputChangeHandler} />
-            <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" name="password" placeholder="Password" value={password} onChange={this.inputChangeHandler} />
-          </div>
-          <div className="form-group">
-              <button className="btn btn-primary">Login</button>
-              <label to="/login" className="btn btn-link">Register</label>
-          </div>
-        </form>
+      <div>
+          <button className = { buttonStyle } onClick={this.loginHandler}>
+            <img src={ LoginButton }/>
+          </button>
       </div>
     );
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  console.log("mapStateToProps(state)");
+  const signing_in = state.signing_in;
+  return {
+      signing_in
+  };
+}
+/* Connect our decoupled component */
+const connectedLogin = connect(mapStateToProps)(Login);
+export { connectedLogin as Login };

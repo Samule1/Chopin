@@ -1,16 +1,18 @@
 /* Import the backend API calling services */
 import { backendService } from './../services/service';
 
-/* Available Redux actions for the user */
+/* Available user Redux actions */
 export const actions = {
   login
 };
 
-function login(username, password) {
+function login() {
     return dispatch => {
-        dispatch(request({ username }));
+        //dispatch(request({ username }));
 
-        backendService.login(username, password)
+        console.log("Login action!");
+
+        backendService.login()
             .then(
                 user => {
                     dispatch(success(user));

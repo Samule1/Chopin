@@ -1,27 +1,24 @@
 /* All backend API calls are done from a service */
 /* Available services can be found here */
 
+import { makeAuthHeader } from './../util/make_auth_header';
+
 export const backendService = {
     login,
     logout
 };
 
-function login(username, password) {
-  console.log("service: login(" + username + ", " + password + ")");
+function login() {
+  console.log("service: login()");
   const req = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json" ,
+      "Accept": 'application/json'
+    }
   };
 
-  return fetch("/user/login", req)
-    .then(resp => {
-      if (!resp.ok) {
-          return Promise.reject(resp.statusText);
-      }
-
-      return resp.json();
-    })
+  return fetch('http://localhost:3001/authentication', { mode: 'no-cors' }, req)
     .then(user => {
         console.log("Got user: " + user + "and token: " + user.token + " as response!");
         if (user && user.token) {
@@ -32,5 +29,5 @@ function login(username, password) {
 }
 
 function logout () {
-  localStorage.removeItem("user")
+  localStorage.removeItem("user_token")
 }

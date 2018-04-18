@@ -21,3 +21,9 @@ body {
   height: 28px;
   pointer-events: none;
 }
+
+.buttonStyle {
+  padding: 0;
+  border: none;
+  background: none;
+}
