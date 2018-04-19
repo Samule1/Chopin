@@ -1,12 +1,17 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export const IndividualRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        localStorage.getItem('user')
+function IndividualRoute ({ component: Component, token, ...rest }) {
+  console.log(token);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+            token
             ? <Component {...props} />
             : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-    )} />
-)
+    } />
+  )
+}
 
 export default IndividualRoute;

@@ -23,11 +23,26 @@ let mainDivStyle = {
 }
 
 class Main extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { accessToken: null }
+  }
+
+  componentDidMount() {
+
+  }
+
   render() {
+    console.log("render()");
+    let parsed = queryString.parse(window.location.search);
+    let accessToken = parsed.access_token;
+
+    //console.log("componentDidMount() accessToken: " + this.state.accessToken);
     return (
         <div style={mainDivStyle}>
             <Switch>
-                <IndividualRoute exact path="/" component={Home} />
+                <IndividualRoute exact path="/" component={Playground} token={accessToken}/>
                 <Route path='/login' component={LoginPage}/>
                 <Route path='/top' component={GetTop}/>
                 <Route path='/playground' component={Playground}/>

@@ -48,9 +48,9 @@ class Login extends Component {
 
     return (
       <div>
-          <button className = { buttonStyle } onClick={this.loginHandler}>
+          <a href="http://localhost:3001/login" className = { buttonStyle }>
             <img src={ LoginButton }/>
-          </button>
+          </a>
       </div>
     );
   }

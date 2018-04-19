@@ -24,8 +24,10 @@ router.get('/', function(req, res) {
     request.post(authOptions, function(error, response, body) {
       let access_token = body.access_token;
       let uri = process.env.FRONTEND_URI || 'http://localhost:3000/'
-      //res.redirect(uri + '?access_token=' + access_token)
-      res.status(200).json({ access_token: access_token});
+      console.log("access_token: " + access_token);
+      res.redirect(uri + '?access_token=' + access_token)
+      //res.status(200).json({ access_token: access_token});
+      //res.send(JSON.stringify({ access_token: access_token}))
     });
     /*
     let code = req.query.code || null;
