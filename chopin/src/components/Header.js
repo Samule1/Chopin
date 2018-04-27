@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './../App.css';
 
+import Search from './Search'
+
 class Header extends Component {
     render() {
     return(
@@ -12,10 +14,8 @@ class Header extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
+                    <Search/>
                     <ul className="navbar-nav ml-auto">
-                        <li>
-                            <Link className="nav-link" to={'/user/top'}>Get Top!</Link>
-                        </li>
                         <li>
                             <Link className="nav-link" to={'/user/playground'}>Playground</Link>
                         </li>

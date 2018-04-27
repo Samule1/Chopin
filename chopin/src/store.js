@@ -12,7 +12,7 @@ const store = createStore(
     compose(
         applyMiddleware(...middleware),
         /* This line makes the chrome extension Redux DeevTools to work (see their doc.)*/
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
 

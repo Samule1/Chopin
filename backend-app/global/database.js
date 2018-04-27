@@ -128,11 +128,17 @@ const data_api = {
             .then(snapshot =>{
                 let res = []
                 snapshot.forEach(element => {
-                    res.push(element.val())
+                    let output = element.val();
+                    output.id = element.key
+                    res.push(output)
                 });
             
                 return res
             })
+    },
+
+    deleteCluster: function(pushkey){
+        return clusterRef.child(pushkey).remove()
     },
     
     removeSubscriber: function(publisher, subscriber){

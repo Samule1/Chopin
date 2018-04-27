@@ -20,6 +20,7 @@ const subscribeRouter = require('./routes/subscribe');
 const unsubscribeRouter = require('./routes/unsubscribe');
 const currentUserRouter = require('./routes/currentuser');
 const getAllClustersRouter = require('./routes/getallclusters');
+const deleteClusterRouter = require('./routes/deletecluster')
 
 
 let app = express();
@@ -51,6 +52,7 @@ app.use('/usr/subscribe', subscribeRouter)
 app.use('/usr/unsubscribe', unsubscribeRouter)
 app.use('/usr/me', currentUserRouter)
 app.use('/usr/clusters', getAllClustersRouter)
+app.use('/usr/cluster/delete', deleteClusterRouter)
 
 
 

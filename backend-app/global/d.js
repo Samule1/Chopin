@@ -17,8 +17,10 @@ let x = {
     ]
 }
 
-//db.storeClustrer("christoffer.forsj@gmail.com", x.tracks, x.name)
+db.storeClustrer("christoffer.forsj@gmail.com", x.tracks, x.name)
 
 //db.addSubscriberAndSubscribed("seth.hampus.carlsson@gmail.com", "christoffer.forsj@gmail.com")
 
-db.unsubscribe("seth.hampus.carlsson@gmail.com", "christoffer.forsj@gmail.com")
+//db.unsubscribe("seth.hampus.carlsson@gmail.com", "christoffer.forsj@gmail.com")
+
+//db.deleteCluster('-LArTJw5bK7qLL0yQ56N')
