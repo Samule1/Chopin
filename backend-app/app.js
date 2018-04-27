@@ -8,7 +8,6 @@ let bodyparser = require('body-parser')
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const dataRouter = require('./routes/data');
 const loginRouter = require('./routes/login');
 const authenticationRouter = require('./routes/authentication');
@@ -20,7 +19,8 @@ const subscribeRouter = require('./routes/subscribe');
 const unsubscribeRouter = require('./routes/unsubscribe');
 const currentUserRouter = require('./routes/currentuser');
 const getAllClustersRouter = require('./routes/getallclusters');
-const deleteClusterRouter = require('./routes/deletecluster')
+const deleteClusterRouter = require('./routes/deletecluster');
+const searchUserRouter = require('./routes/search');
 
 
 let app = express();
@@ -40,7 +40,6 @@ app.use(bodyparser.json());
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/data', dataRouter)
 app.use('/login', loginRouter)
 app.use('/authentication', authenticationRouter)
@@ -53,7 +52,7 @@ app.use('/usr/unsubscribe', unsubscribeRouter)
 app.use('/usr/me', currentUserRouter)
 app.use('/usr/clusters', getAllClustersRouter)
 app.use('/usr/cluster/delete', deleteClusterRouter)
-
+app.use('/app/search', searchUserRouter)
 
 
 

@@ -26,7 +26,7 @@ const data_api = {
         })
     },
     
-    insertNewUser: function(id, name){
+    insertNewUser: function(id, name, spotifyId){
 
         return this.exists(id).then(exist =>{
             if(exist){
@@ -35,7 +35,8 @@ const data_api = {
             else{
                 return usrRef.push({
                     id: id,
-                    name: name, 
+                    name: name,
+                    spotifyId: spotifyId
                 })
             }
         })
@@ -218,6 +219,20 @@ const data_api = {
         })
         
 
+    },
+
+    search: function(query, lim){
+        
+        return usrRef.orderByChild('spotifyId')
+                .startAt(query)
+                .endAt(query + '\uf8ff')
+                .limitToFirst(lim)
+                .once('value')
+                .then(snapshot => {
+                    let res = []
+                    snapshot.forEach(item => res.push(item.val))
+                    return res
+                })
     }
 }
 
