@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import './../App.css';
-import queryString from 'query-string'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import LoginPage from './LoginPage'
-import Cluster2D from './Cluster2D'
-import Header from './Header'
-import Home from './Home'
 import GetTop from './GetTop'
 import Playground from './Playground'
 import IndividualRoute from './IndividualRoute'

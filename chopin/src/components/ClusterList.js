@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
-import UserInfo from './UserInfo'
 import store from '../store'
 import NextId from './../util/idgen'
 
 import SavedCluster from './SavedCluster'
+import { fetchUserClusterList } from '../actions/profileActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-let containerStyle = {
-    width: '15%'
-}
-
-
-
-export default class ClusterList extends Component {
+class ClusterList extends Component {
 
     constructor(props){
         super(props)
@@ -19,13 +15,17 @@ export default class ClusterList extends Component {
         this.state = {
             clusters: []
         }
+
+        store.subscribe(() => {
+            let data = store.getState().profile.clusterListData;
+            if (data) {
+                this.setState({ clusters: data });
+            }
+         });
     }
 
     componentWillMount(){
-        let token = store.getState().login.accessToken;
-        fetch('/usr/clusters?token=' + token )
-        .then(res => res.json())
-        .then(data => this.setState({clusters: data}))
+        this.props.fetchUserClusterList();
     }
     render() {
         let id = NextId();
@@ -34,9 +34,23 @@ export default class ClusterList extends Component {
             return <SavedCluster name = {cluster.name} tracks = {cluster.tracks} id = {id++} idx = {idx++}/>
         })
         return (
-            <div id="accordion" style = {containerStyle}>
+            <div id="accordion">
                 {clusters}
             </div>
         )
     }
 }
+
+ClusterList.propTypes = {
+    fetchUserClusterList: PropTypes.func.isRequired,
+    clusterListData: PropTypes.array
+}
+
+const mapStateToProps = state => {
+    // This comes from our root reducer
+    return {
+        profile: state.profile.clusterListData
+    }
+}
+
+export default connect(mapStateToProps, { fetchUserClusterList } )(ClusterList);

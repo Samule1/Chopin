@@ -7,8 +7,10 @@ import { combineReducers } from 'redux';
 //import loginReducer from './loginReducer';
 import graphReducer from './graphReducer';
 import loginReducer from './loginReducer';
+import profileReducer from './profileReducer';
 
 export default combineReducers({
   graph: graphReducer,
-  login: loginReducer
+  login: loginReducer,
+  profile: profileReducer
 });

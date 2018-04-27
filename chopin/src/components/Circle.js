@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import './../App.css';
-import ReactDOM from 'react-dom';
 import * as d3 from 'd3'
 import './../plotstyle/circle.css'
-import queryString from 'query-string'
-import GetTop from './GetTop'
 import { connect } from 'react-redux';
 import { fetchKmeans } from '../actions/graphActions';
 import PropTypes from 'prop-types';
@@ -15,13 +12,12 @@ class Circle extends Component {
 
     constructor(props){
          super(props)
-         console.log('Contructing!')
+
          this.state = {data: require("../data/cluster_format_template.json")}
 
          store.subscribe(() => {
             let data = store.getState().graph.dataItems;
             if (data) {
-                console.log("Setting DATA IN CONSTRUCTOR!");
                 this.setState({data: data})
             }
          });
@@ -98,7 +94,7 @@ class Circle extends Component {
 
 Circle.propTypes = {
     fetchKmeans: PropTypes.func.isRequired,
-    dataItems: PropTypes.array.isRequired
+    dataItems: PropTypes.array
 }
 
 const mapStateToProps = state => {

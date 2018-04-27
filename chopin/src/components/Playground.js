@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './../App.css';
-import queryString from 'query-string'
 import Circle from './Circle'
 import Header from './Header'
 
