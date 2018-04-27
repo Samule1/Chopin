@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './../App.css';
-import { Login } from './Login'
+import Login  from './Login'
 import Background from '../images/login_bg.jpg';
 
 /* Some very basic bootstrap layout settings */

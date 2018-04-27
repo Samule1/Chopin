@@ -5,6 +5,10 @@ import * as d3 from 'd3'
 import './../plotstyle/circle.css'
 import queryString from 'query-string'
 import GetTop from './GetTop'
+import { connect } from 'react-redux';
+import { fetchKmeans } from '../actions/graphActions';
+import PropTypes from 'prop-types';
+import store from '../store'
 
 
 class Circle extends Component {
@@ -14,6 +18,13 @@ class Circle extends Component {
          console.log('Contructing!')
          this.state = {data: require("../data/cluster_format_template.json")}
 
+         store.subscribe(() => {
+            let data = store.getState().graph.dataItems;
+            if (data) {
+                console.log("Setting DATA IN CONSTRUCTOR!");
+                this.setState({data: data})
+            }
+         });
     }
 
     draw(g, pack, colors, format, cleanfirst){
@@ -61,19 +72,12 @@ class Circle extends Component {
         this.draw(this.g, this.pack, this.colors, this.format, true)
     }
 
+    componentWillMount() {
+        console.log('fetchKmeans()');
+        this.props.fetchKmeans();
+    }
+
     componentDidMount(){
-
-        let parsed = queryString.parse(window.location.search);
-        let accessToken = parsed.access_token;
-    
-        if (accessToken){
-            console.log(accessToken)
-            fetch('http://localhost:3001/top?token='+accessToken)
-              .then(response => response.json())
-              .then(responseJSON => this.setState({data: responseJSON}))
-        }
-
-        
         
         this.svg = d3.select(this.refs.anchor);
         this.diameter = 960//svg.attr("width");
@@ -92,4 +96,16 @@ class Circle extends Component {
     }
 }
 
-export default Circle;
+Circle.propTypes = {
+    fetchKmeans: PropTypes.func.isRequired,
+    dataItems: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => {
+    // This comes from our root reducer
+    return {
+        graph: state.graph.dataItems
+    }
+}
+
+export default connect(mapStateToProps, { fetchKmeans } )(Circle);
