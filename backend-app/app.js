@@ -4,6 +4,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let cors = require('cors');
+let bodyparser = require('body-parser')
 
 
 const indexRouter = require('./routes/index');
@@ -13,6 +14,10 @@ const loginRouter = require('./routes/login');
 const authenticationRouter = require('./routes/authentication');
 const callbackRouter = require('./routes/callback');
 const getTopRouter = require('./routes/getTop');
+const getUsrRouter = require('./routes/getuser');
+const addClusterRouter = require('./routes/addcluster');
+const subscribeRouter = require('./routes/subscribe');
+const unsubscribeRouter = require('./routes/unsubscribe');
 
 
 let app = express();
@@ -28,6 +33,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyparser.json());
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -36,6 +43,10 @@ app.use('/login', loginRouter)
 app.use('/authentication', authenticationRouter)
 app.use('/callback', callbackRouter)
 app.use('/top', getTopRouter)
+app.use('/usr/find', getUsrRouter)
+app.use('/usr/add/cluster', addClusterRouter)
+app.use('/usr/subscribe', subscribeRouter)
+app.use('/usr/unsubscribe', unsubscribeRouter)
 
 
 
