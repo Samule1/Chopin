@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
     usr_fetch(token).then(response =>{
 
         let subscriber = response.data.email
-        return db.addSubscriber(publisher, subscriber)       
+        return db.addSubscriberAndSubscribed(publisher, subscriber)       
         
     })
     .then(() =>{

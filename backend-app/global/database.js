@@ -72,6 +72,26 @@ const data_api = {
     },
 
     addSubscriber: function(publisher, subscriber){
+        return this.getUserPushKey(publisher)
+            .then(key => {
+                let subRef = admin.database().ref('/users/'+key+'/subscribers')
+                subRef.push({
+                    id: subscriber
+                })
+            }) 
+    },
+
+    addSubscribed: function(publisher, subscriber){
+        return this.getUserPushKey(subscriber)
+            .then(key => {
+                let subRef = admin.database().ref('/users/'+key+'/subscribed')
+                subRef.push({
+                    id: publisher
+                })
+            }) 
+    },
+
+    addSubscriberAndSubscribed: function(publisher, subscriber){
         
         return Promise.all([
             this.exists(publisher),
@@ -83,14 +103,14 @@ const data_api = {
                 throw new Error('User '+publisher+' not found!')
             }
 
-            return this.getUserPushKey(publisher)
+            return Promise.all([
+
+                this.addSubscriber(publisher, subscriber),
+                this.addSubscribed(publisher, subscriber)
+                  
+            ])  
         })
-        .then(key => {
-            let subRef = admin.database().ref('/users/'+key+'/subscribers')
-            subRef.push({
-                id: subscriber
-            })
-        }) 
+        
         
     },
 
@@ -117,6 +137,41 @@ const data_api = {
     
     removeSubscriber: function(publisher, subscriber){
        
+        return this.getUserPushKey(publisher)
+            .then(key =>{
+                return admin.database().ref('/users/'+key+'/subscribers')
+                .orderByChild('id')
+                .equalTo(subscriber)
+                .once('value')
+        
+            })
+            .then(snapshot => {
+
+                snapshot.forEach(item =>{
+                    snapshot.ref.child(item.key).remove()
+                })
+                  
+            })
+    },
+
+    removeSubscribed: function(publisher, subscriber){
+        
+        return this.getUserPushKey(subscriber)
+            .then(key =>{
+                return admin.database().ref('/users/'+key+'/subscribed')
+                .orderByChild('id')
+                .equalTo(publisher)
+                .once('value')
+
+            })
+            .then(snapshot => {
+                snapshot.forEach(item =>{
+                    snapshot.ref.child(item.key).remove()
+                })
+            })
+    },
+
+    unsubscribe: function(publisher, subscriber){
         return Promise.all([
             this.exists(publisher),
             this.exists(subscriber)
@@ -127,22 +182,10 @@ const data_api = {
                 throw new Error('User '+publisher+' not found!')
             }
 
-            return this.getUserPushKey(publisher)
-        })
-        .then(key =>{
-            return admin.database().ref('/users/'+key+'/subscribers')
-            .orderByChild('id')
-            .equalTo(subscriber)
-            .once('value')
-    
-        })
-        .then(snapshot => {
-
-            snapshot.forEach(item =>{
-                snapshot.ref.child(item.key).remove()
-            })
-            
-            
+            return Promise.all([
+                this.removeSubscriber(publisher, subscriber),
+                this.removeSubscribed(publisher, subscriber)
+            ])
         })
     },
 
