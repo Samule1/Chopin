@@ -10,22 +10,29 @@ export const backendService = {
 
 function login() {
   console.log("service: login()");
-  const req = {
+  let req = {
     method: "GET",
     headers: {
-      "Content-Type": "application/json" ,
-      "Accept": 'application/json'
+      "Content-Type": "application/json"
     }
   };
 
-  return fetch('http://localhost:3001/authentication', { mode: 'no-cors' }, req)
+  //return push("/login");
+
+  /*
+  return fetch('/login', req)
+    .then(response => {
+      console.log(response);
+    })
     .then(user => {
         console.log("Got user: " + user + "and token: " + user.token + " as response!");
         if (user && user.token) {
           localStorage.setItem("user", user.token);
         }
         return user;
-    });
+    })
+    .catch(error =>{console.log(error)});
+    */
 }
 
 function logout () {

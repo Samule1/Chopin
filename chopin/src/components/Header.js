@@ -13,14 +13,14 @@ class Header extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'/login'}>Log in</Link>
+                        <li>
+                            <Link className="nav-link" to={'/user/top'}>Get Top!</Link>
                         </li>
                         <li>
-                            <Link className="nav-link" to={'/top'}>Get Top!</Link>
+                            <Link className="nav-link" to={'/user/playground'}>Playground</Link>
                         </li>
                         <li>
-                            <Link className="nav-link" to={'/playground'}>Playground</Link>
+                            <Link className="nav-link" to={'/user/profile'}>Profile</Link>
                         </li>
                     </ul>
                 </div>

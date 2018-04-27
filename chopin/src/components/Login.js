@@ -1,68 +1,43 @@
 import React, { Component } from 'react';
-import { actions } from './../actions/actions'
+//import { actions } from './../actions/actions'
 import './../App.css';
 import { connect } from 'react-redux'
+import { login } from '../actions/loginAction';
+import PropTypes from 'prop-types';
 import LoginButton from '../images/login_spotify.png';
 
 let buttonStyle = "buttonStyle";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: "",
-      password: "",
-    }
-
-    /* Bind local functions and onSubmit event handlers */
-    this.loginHandler = this.loginHandler.bind(this);
-    this.inputChangeHandler = this.inputChangeHandler.bind(this);
-  }
-
-  loginHandler(event) {
-    /* Don't use the ordinary login event... */
-    event.preventDefault();
-    /*
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
-    */
-
-    console.log("Dispatch: " + typeof dispatch);
-    const username = this.state.username;
-    const password = this.state.password;
-
-    this.props.dispatch(actions.login());
-  }
-
-  inputChangeHandler(event) {
-    console.log("inputChangeHandler() event: " + event);
-    const { name, value } = event.target;
-        this.setState({ [name]: value });
-  }
-
   render() {
-    const username = this.state.username;
-    const password = this.state.password;
-    const signing_in = this.props.signing_in;
-
     return (
       <div>
-          <button className = { buttonStyle } onClick={this.loginHandler}>
-            <img src={ LoginButton }/>
+          <button className = { buttonStyle }>
+            <a href="http://192.168.0.101:3001/login">
+              <img src={ LoginButton }/>
+            </a>
           </button>
       </div>
     );
   }
 }
 
+/*
+Login.propTypes = {
+  login: PropTypes.func.isRequired
+}
+
 function mapStateToProps(state) {
   console.log("mapStateToProps(state)");
-  const signing_in = state.signing_in;
+  // Comes from our reducer
   return {
-      signing_in
-  };
+    login: state.login.success
+  }
 }
+*/
 /* Connect our decoupled component */
-const connectedLogin = connect(mapStateToProps)(Login);
+/*
+const connectedLogin = connect(mapStateToProps, { login } )(Login);
 export { connectedLogin as Login };
+*/
+export default Login;

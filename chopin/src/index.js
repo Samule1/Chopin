@@ -5,12 +5,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { Store } from './util/store';
+import  store  from './store';
 
 const app = document.getElementById('root');
 
 ReactDOM.render(
-<Provider store={Store}>
+<Provider store={store}>
   <BrowserRouter>
       <div>
           <Route path='/' component={App}/>
