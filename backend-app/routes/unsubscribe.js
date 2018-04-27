@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
     usr_fetch(token).then(response =>{
 
         let subscriber = response.data.email
-        return db.removeSubscriber(publisher, subscriber)       
+        return db.unsubscribe(publisher, subscriber)       
         
     })
     .then(() =>{
