@@ -44,7 +44,7 @@ const data_api = {
 
     exists: function(id){
         return this.getUser(id).then(result =>{
-            return result.length != 0
+            return result != undefined
         })
     },
 
@@ -113,7 +113,63 @@ const data_api = {
             
                 return res
             })
-    } 
+    },
+    
+    removeSubscriber: function(publisher, subscriber){
+       
+        return Promise.all([
+            this.exists(publisher),
+            this.exists(subscriber)
+        ])
+        .then(exist =>{
+
+            if(!exist){
+                throw new Error('User '+publisher+' not found!')
+            }
+
+            return this.getUserPushKey(publisher)
+        })
+        .then(key =>{
+            return admin.database().ref('/users/'+key+'/subscribers')
+            .orderByChild('id')
+            .equalTo(subscriber)
+            .once('value')
+    
+        })
+        .then(snapshot => {
+
+            snapshot.forEach(item =>{
+                snapshot.ref.child(item.key).remove()
+            })
+            
+            
+        })
+    },
+
+    getSubscribers: function(publisher){
+
+        return this.exists(publisher).then(exist => {
+            return usrRef.orderByChild('id')
+                .equalTo(publisher)
+                .limitToFirst(1)
+                .once('value')
+        })
+        .then(snapshot => {
+
+            let key = Object.keys(snapshot.val())[0];
+            return snapshot.child(key + '/subscribers')
+        })
+        .then(snapshot =>{
+            let out = []
+            snapshot.forEach(subscriber=>{
+                out.push(subscriber.val().id)
+            })
+
+            return out
+        })
+        
+
+    }
 }
 
 module.exports = data_api
