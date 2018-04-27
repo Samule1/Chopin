@@ -11,6 +11,7 @@ import GetTop from './GetTop'
 import Playground from './Playground'
 import IndividualRoute from './IndividualRoute'
 import User from './User'
+import Profile from './Profile'
 
 let mainDivStyle = {
   flex: 1,
@@ -29,6 +30,7 @@ class Main extends Component {
         <div style={mainDivStyle}>
             <Switch>
                 <IndividualRoute exact path="/" component={User}/>
+                <IndividualRoute path="/user/profile" component={Profile}/>
                 <Route path='/login' component={LoginPage}/>
                 <Route path='/user/top' component={GetTop}/>
                 <Route path='/user/playground' component={Playground}/>
