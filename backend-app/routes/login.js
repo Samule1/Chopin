@@ -5,7 +5,7 @@ let secret = require('./../secrets/secret');
 
 let redirect_uri =
   process.env.REDIRECT_URI ||
-  'http://localhost:3001/callback'
+  'http://192.168.0.101:3001/callback'
 
 router.get('/', function(req, res) {
     res.redirect('https://accounts.spotify.com/authorize?' +
