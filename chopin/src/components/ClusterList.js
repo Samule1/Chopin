@@ -31,7 +31,7 @@ class ClusterList extends Component {
         let id = NextId();
         let idx = NextId();
         let clusters = this.state.clusters.map(cluster =>{
-            return <SavedCluster name = {cluster.name} tracks = {cluster.tracks} id = {id++} idx = {idx++}/>
+            return <SavedCluster name = {cluster.name} tracks = {cluster.tracks} id = {id++} idx = {idx++} clusterId = {cluster.id}/>
         })
         return (
             <div id="accordion">
