@@ -1,25 +1,46 @@
 import React, { Component } from 'react'
-import UserInfo from './UserInfo'
+import store from '../store'
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { searchForUsers } from '../actions/searchActions';
 
 let centerStyle = {
     width: '100%',
     textAlign: 'center'
 }
 
-let formStyle = {
-    display: 'inline-block'
+class Search extends Component {
+    constructor(props) {
+        super(props);
+
+        this.searchInput = this.searchInput.bind(this);
+    }
+
+    searchInput(query) {
+        this.props.searchForUsers(query);
+    }
+
+    
+    render() {
+        return (
+            <div style = {centerStyle}>
+                <AsyncTypeahead onSearch={this.searchInput} options={this.props.search} labelKey="spotifyId" isLoading={this.props.loading} placeholder="Find a musical friend..."/>
+            </div>
+        )
+    }
 }
 
-export default class Search extends Component {
-  render() {
-    return (
-        <div style = {centerStyle}>
-            <form style = {formStyle}>
-                <div>
-                    <input type="text" className="form-control" placeholder="Search" name="srch-term" id="srch-term"/>
-                </div>
-            </form>
-        </div>
-    )
-  }
+Search.propTypes = {
+    searchForUsers: PropTypes.func.isRequired,
+    foundUsers: PropTypes.array,
+    isLoading: PropTypes.bool
 }
+
+const mapStateToProps = state => ({
+    // This comes from our root reducer
+    search: state.search.foundUsers,
+    loading: state.search.isLoading
+});
+
+export default connect(mapStateToProps, { searchForUsers } )(Search);

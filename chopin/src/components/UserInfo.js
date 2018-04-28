@@ -17,11 +17,11 @@ class UserInfo extends Component {
                     <form>
                         <div className="form-group">
                             <label>Spofify username</label>
-                            <input type="text" className="form-control" placeholder={this.props.profile.name} readOnly />
+                            <input type="text" className="form-control" placeholder={this.props.profile.spotifyId} readOnly />
                         </div>
                         <div className="form-group">
                             <label>Spotify email</label>
-                            <input type="text" className="form-control" placeholder={this.props.profile.id}readOnly />
+                            <input type="text" className="form-control" placeholder={this.props.profile.id} readOnly/>
                         </div>
                     </form>
                 </div>

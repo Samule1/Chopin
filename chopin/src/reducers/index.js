@@ -8,9 +8,11 @@ import { combineReducers } from 'redux';
 import graphReducer from './graphReducer';
 import loginReducer from './loginReducer';
 import profileReducer from './profileReducer';
+import searchReducer from './searchReducer';
 
 export default combineReducers({
   graph: graphReducer,
   login: loginReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  search: searchReducer
 });
