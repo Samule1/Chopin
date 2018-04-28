@@ -6,21 +6,17 @@ const db = require('./../global/database')
 router.get('/', function(req, res, next) {
     
     let token = req.query.token;
-    let query = req.query.query;
-
     res.setHeader('Content-Type', 'application/json');
 
     usr_fetch(token).then(response =>{
 
-        return db.search(query, 10)        
+        return db.getCustomToken(response.data.email)        
         
     })
-    .then(results => {
-        console.log(JSON.stringify(results, null,2))
-        res.send(JSON.stringify(results))
+    .then(token => {
+        res.send(JSON.stringify({dbToken: token}))
     })
     .catch(err =>{
-        console.log(err)
         res.status(500).send({ error: JSON.stringify(err) })
     })
     

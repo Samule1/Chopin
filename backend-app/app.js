@@ -21,6 +21,7 @@ const currentUserRouter = require('./routes/currentuser');
 const getAllClustersRouter = require('./routes/getallclusters');
 const deleteClusterRouter = require('./routes/deletecluster');
 const searchUserRouter = require('./routes/search');
+const dbTokenRouter = require('./routes/requestdbtoken')
 
 
 let app = express();
@@ -53,6 +54,7 @@ app.use('/usr/me', currentUserRouter)
 app.use('/usr/clusters', getAllClustersRouter)
 app.use('/usr/cluster/delete', deleteClusterRouter)
 app.use('/app/search', searchUserRouter)
+app.use('/usr/db/token', dbTokenRouter)
 
 
 

@@ -12,8 +12,20 @@ const usrRef = admin.database().ref('/users')
 const userSubRef = admin.database().ref('/users/subscribers')
 const clusterRef = admin.database().ref('/clusters')
 
+const additionalClaims = {
+    premiumAccount: true
+  };
+
 
 const data_api = {
+
+    getCustomToken: function(uid){
+        return this.getUserPushKey(uid)
+                .then(key => {
+                    return admin.auth().createCustomToken(key, additionalClaims)
+                })
+        
+    },
 
     getUser: function(id){
         return usrRef.orderByChild("id").equalTo(id).once("value").then(snapshot =>{
@@ -72,13 +84,20 @@ const data_api = {
             })
     },
 
+    postMessage: function(key, message){
+        let msgsRef = admin.database().ref('/users/'+key+'/messages')
+        msgsRef.push({message})
+    },
+
     addSubscriber: function(publisher, subscriber){
         return this.getUserPushKey(publisher)
             .then(key => {
-                let subRef = admin.database().ref('/users/'+key+'/subscribers')
-                subRef.push({
-                    id: subscriber
-                })
+
+                return Promise.all([
+                    admin.database().ref('/users/'+key+'/subscribers').push({ id: subscriber}),
+                    this.postMessage(key, subscriber+' just subscribed to you!')
+                ])
+                
             }) 
     },
 
@@ -89,6 +108,7 @@ const data_api = {
                 subRef.push({
                     id: publisher
                 })
+                
             }) 
     },
 
@@ -146,6 +166,9 @@ const data_api = {
        
         return this.getUserPushKey(publisher)
             .then(key =>{
+
+                this.postMessage(key, subscriber + ' just unsubscribed from you!')
+
                 return admin.database().ref('/users/'+key+'/subscribers')
                 .orderByChild('id')
                 .equalTo(subscriber)
@@ -230,7 +253,7 @@ const data_api = {
                 .once('value')
                 .then(snapshot => {
                     let res = []
-                    snapshot.forEach(item => res.push(item.val))
+                    snapshot.forEach(item => res.push(item.val()))
                     return res
                 })
     }
