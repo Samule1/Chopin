@@ -245,7 +245,7 @@ const data_api = {
     },
 
     search: function(query, lim){
-        
+        query = query.trim()
         return usrRef.orderByChild('spotifyId')
                 .startAt(query)
                 .endAt(query + '\uf8ff')
@@ -253,7 +253,10 @@ const data_api = {
                 .once('value')
                 .then(snapshot => {
                     let res = []
-                    snapshot.forEach(item => res.push(item.val()))
+                    console.log(snapshot.numChildren())
+                    snapshot.forEach(item =>{
+                        res.push(item.val())
+                    })
                     return res
                 })
     }
