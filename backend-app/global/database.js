@@ -249,8 +249,8 @@ const data_api = {
         return usrRef.orderByChild('spotifyId')
                 .startAt(query)
                 .endAt(query + '\uf8ff')
-                .once('value')
                 .limitToFirst(lim)
+                .once('value')
                 .then(snapshot => {
                     let res = []
                     console.log(snapshot.numChildren())
