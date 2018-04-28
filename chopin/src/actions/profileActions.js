@@ -45,7 +45,9 @@ export const deleteUserClusterFromList = (clusterId) => dispatch => {
     }));
 }
 
-export const deletingUserCluster = userCluster => ({
-    type: DELETING_USER_CLUSTER,
-    userCluster
-});
+export const deletingUserCluster = (clusterId) => dispatch => {
+    dispatch({
+        type: DELETING_USER_CLUSTER,
+        deletingClusterId: clusterId
+    })
+};

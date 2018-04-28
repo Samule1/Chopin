@@ -4,7 +4,7 @@ import { DELETED_USER_CLUSTER, DELETING_USER_CLUSTER } from '../actions/types';
 const initialState = {
     userData: {},
     clusterListData: [],
-    deletingCluster: false
+    deletingClusterId: null
 }
 
 export default function(state = initialState, action) {
@@ -23,12 +23,11 @@ export default function(state = initialState, action) {
         case DELETING_USER_CLUSTER:
             return {
                 ...state,
-                deletingCluster: true
+                deletingClusterId: action.deletingClusterId
             }
         case DELETED_USER_CLUSTER:
             return {
-                ...state,
-                deletingCluster: false
+                ...state
             }
         default:
             return state;

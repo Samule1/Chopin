@@ -13,12 +13,13 @@ class SavedCluster extends Component {
     }
 
     deleteSavedCluster() {
-        this.props.deletingUserCluster();
-        this.props.deleteUserClusterFromList(this.props.clusterId);   
+        console.log("Deleting cluster id: " + this.props.clusterId)
+        this.props.deletingUserCluster(this.props.clusterId);
+        this.props.deleteUserClusterFromList(this.props.clusterId); 
     }
 
     render() {
-        let deletingCluster = this.props.deletingCluster;
+        let deletingClusterId = this.props.deletingClusterId;
 
         let tracks = this.props.tracks.map(track => {
             return (<li>{track}</li>)
@@ -30,7 +31,8 @@ class SavedCluster extends Component {
                             <button className="btn btn-light" data-toggle="collapse" data-target={'#'+this.props.idx} aria-expanded="true" aria-controls={this.props.idx}>
                                 {this.props.name}
                             </button>
-                            {!deletingCluster && <button type="button" className="btn btn-secondary float-right" onClick={this.deleteSavedCluster}>Delete</button>}
+                            {(deletingClusterId === null || deletingClusterId !== this.props.clusterId)  && <button type="button" className="btn btn-secondary float-right" onClick={this.deleteSavedCluster}>Delete</button>}
+                            {(deletingClusterId !== null && deletingClusterId === this.props.clusterId) && <button type="button" className="btn btn-basic float-right" disabled>Delete</button>}
                         </h5>
                     </div>
 
@@ -49,13 +51,13 @@ class SavedCluster extends Component {
 SavedCluster.propTypes = {
     deleteUserClusterFromList: PropTypes.func.isRequired,
     deletingUserCluster: PropTypes.func.isRequired,
-    deletingCluster: PropTypes.bool.isRequired,
+    deletingClusterId: PropTypes.string
 }
 
 const mapStateToProps = state => ({
     // This comes from our root reducer
     profile: state.profile.clusterDeleted,
-    deletingCluster: state.profile.deletingCluster
+    deletingClusterId: state.profile.deletingClusterId
 });
 
 export default connect(mapStateToProps, { deleteUserClusterFromList, deletingUserCluster })(SavedCluster);

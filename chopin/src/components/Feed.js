@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import UserInfo from './UserInfo'
 import * as firebase from 'firebase'
 import store from './../store'
+import { ListGroup } from 'react-bootstrap';
 
 const config = {
     apiKey: "AIzaSyD7sAHriC4gPZES2NZ35KuewAIgRrIUP8Q",
@@ -11,6 +11,10 @@ const config = {
     storageBucket: "chopin-d6e38.appspot.com",
     messagingSenderId: "270661395851"
   };
+
+const listGroupStyle = {
+    width: "50%",
+};
 
 export default class Feed extends Component {
 
@@ -54,13 +58,13 @@ export default class Feed extends Component {
 
     render() {
         let feedItems = this.state.content.map(item => {
-            return (<li>{item}</li>)
+            return (<li className="list-group-item">{item}</li>)
         })
         return (
-            <div>
-                <ul>
+            <div style={ listGroupStyle }>
+                <ListGroup componentClass="ul">
                     {feedItems}
-                </ul>
+                </ListGroup>
             </div>
         )
     }

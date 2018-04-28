@@ -6,7 +6,7 @@ import LoginPage from './LoginPage'
 import GetTop from './GetTop'
 import Playground from './Playground'
 import IndividualRoute from './IndividualRoute'
-import User from './User'
+import UserMain from './UserMain'
 import Profile from './Profile'
 
 let mainDivStyle = {
@@ -25,12 +25,13 @@ class Main extends Component {
     return (
         <div style={mainDivStyle}>
             <Switch>
-                <IndividualRoute exact path="/" component={User}/>
+                <IndividualRoute exact path="/" component={UserMain}/>
+                <IndividualRoute exact path="/user" component={UserMain}/>
                 <IndividualRoute path="/user/profile" component={Profile}/>
                 <Route path='/login' component={LoginPage}/>
                 <Route path='/user/top' component={GetTop}/>
                 <Route path='/user/playground' component={Playground}/>
-                <Route path='/user/:accessToken' component={User}/>
+                <Route path='/user/:accessToken' component={UserMain}/>
             </Switch>
         </div>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import store from '../store'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
