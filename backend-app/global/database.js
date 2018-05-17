@@ -136,7 +136,27 @@ const data_api = {
     },
 
     storeClustrer: function(owner, tracks, name){
-        
+        this.getSubscribers(owner)
+            .then(subscribers => {
+                console.log(subscribers);
+                return Promise.all(
+                    subscribers.map(subscriber => {
+                        return this.getUserPushKey(subscriber);
+                    })
+                )
+            })
+            .then(keys => {
+                keys.forEach(key => {
+                    this.postMessage(key, owner + " just saved the cluster " + name + ".")
+                })
+            })
+            .then(() => {
+                return this.getUserPushKey(owner)
+            })
+            .then(ownerKey => {
+                this.postMessage(ownerKey, "You just saved the cluster " + name + ".")
+            })
+
         return clusterRef.push({
           owner: owner,
           tracks: tracks,

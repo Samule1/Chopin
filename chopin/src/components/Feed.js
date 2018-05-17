@@ -42,7 +42,7 @@ export default class Feed extends Component {
           })
     }
 
-    componentWillMount(){
+    componentDidMount(){
         let accessToken = store.getState().login.accessToken;
         fetch('/usr/db/token?token='+accessToken)
         .then(res => res.json())

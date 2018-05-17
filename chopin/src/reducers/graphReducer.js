@@ -1,7 +1,8 @@
-import { FETCH_KMEANS } from '../actions/types';
+import { FETCH_KMEANS, SELECTED_CLUSTER } from '../actions/types';
 
 const initialState = {
-    dataItems: []
+    dataItems: [],
+    selectedClusterItems: []
 }
 
 export default function(state = initialState, action) {
@@ -11,6 +12,11 @@ export default function(state = initialState, action) {
                 ...state,
                 dataItems: action.payload
             };
+        case SELECTED_CLUSTER:
+            return {
+                ...state,
+                selectedClusterItems: action.payload
+            }
         default:
             return state;
     }

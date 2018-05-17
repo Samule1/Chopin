@@ -10,7 +10,7 @@ class Login extends Component {
     return (
       <div>
           <button className = { buttonStyle }>
-            <a href="http://192.168.0.101:3001/login">
+            <a href="http://localhost:3001/login">
               <img src={ LoginButton } alt="Login"/>
             </a>
           </button>

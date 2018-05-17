@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './../App.css';
 import Circle from './Circle'
 import Header from './Header'
+import { SaveSelectedCluster } from './SaveSelectedCluster';
 
 class Playground extends Component {
 
@@ -16,6 +17,7 @@ class Playground extends Component {
                 <Circle width={900} height={450}/>
             </svg>
         </div>
+        <SaveSelectedCluster/>
       </div>
     );
   }

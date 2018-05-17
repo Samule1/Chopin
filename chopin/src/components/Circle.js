@@ -3,9 +3,11 @@ import './../App.css';
 import * as d3 from 'd3'
 import './../plotstyle/circle.css'
 import { connect } from 'react-redux';
-import { fetchKmeans } from '../actions/graphActions';
+import { fetchKmeans, selectCluster } from '../actions/graphActions';
 import PropTypes from 'prop-types';
 import store from '../store'
+
+import { Modal, Button } from 'react-bootstrap';
 
 
 class Circle extends Component {
@@ -42,9 +44,10 @@ class Circle extends Component {
         let node = g.selectAll(".node")
                     .data(pack(root).leaves())
                     .enter().append("g")
-                    .attr("class", "node")
+                    .attr("class", d => { return "node cluster-" + d.data.cluster})
                     .attr("transform", d => { return "translate(" + d.x + "," + d.y + ")"; })
-                    .style("fill", d => colors(d.data.cluster) );
+                    .style("fill", d => colors(d.data.cluster) )
+                    .attr("song", d => { return d.data.name});
 
         node.append("title")
             .text(d => { return d.data.name + "\n" + format(d.value); });
@@ -57,8 +60,12 @@ class Circle extends Component {
             .text(d => { return d.data.name.substring(0, d.r / 3); })
             .style("fill", "black");
 
-        node.on('mouseover ', (d)=>{
-            console.log(d.data.name)
+        node.on('click ', (d)=>{
+            let songs = [];
+            this.svg.selectAll(".node.cluster-" + d.data.cluster).each(n => {
+              songs.push(n.data.name);
+            });
+            this.props.selectCluster(songs);
         })
 
         console.log(this.state)
@@ -82,8 +89,6 @@ class Circle extends Component {
         this.pack = d3.pack().size([this.diameter - 4, this.diameter - 4]);
         
         this.colors = d3.scaleOrdinal(d3.schemeCategory10);
-        
-        this.draw(this.g, this.pack, this.colors, this.format, false)
 
         
     }
@@ -94,14 +99,15 @@ class Circle extends Component {
 
 Circle.propTypes = {
     fetchKmeans: PropTypes.func.isRequired,
+    selectCluster: PropTypes.func.isRequired,
     dataItems: PropTypes.array
 }
 
 const mapStateToProps = state => {
     // This comes from our root reducer
     return {
-        graph: state.graph.dataItems
+        graph: state.graph.dataItems,
     }
 }
 
-export default connect(mapStateToProps, { fetchKmeans } )(Circle);
+export default connect(mapStateToProps, { fetchKmeans, selectCluster } )(Circle);
